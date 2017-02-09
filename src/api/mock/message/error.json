@@ -1,0 +1,7 @@
+{
+  "errors": [
+    {"email": "Email should be in appropriate format"},
+    {"name": "Unexpected value"},
+    {"message": "Unexpected value"}
+  ]
+}

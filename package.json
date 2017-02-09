@@ -17,6 +17,7 @@
     "express": "^4.14.1",
     "express-graphql": "^0.6.2",
     "express-jwt": "^5.1.0",
+    "express-validator": "^3.1.2",
     "fastclick": "^1.0.6",
     "fbjs": "^0.8.8",
     "graphql": "^0.9.1",

@@ -19,6 +19,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/server';
 import UniversalRouter from 'universal-router';
 import PrettyError from 'pretty-error';
+import expressValidator from 'express-validator';
 import App from './components/App';
 import Html from './components/Html';
 import { ErrorPageWithoutStyle } from './routes/error/ErrorPage';
@@ -74,6 +75,15 @@ app.get('/login/facebook/return',
     res.redirect('/');
   },
 );
+
+app.use(expressValidator({
+  errorFormatter: (param, msg, value) => ({ [param]: msg }),
+  customValidators: {
+    isArray: (value) => Array.isArray(value),
+  },
+
+}));
+app.use(require('./api/apiRouter').default);
 
 //
 // Register API middleware
