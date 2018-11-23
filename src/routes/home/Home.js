@@ -8,31 +8,23 @@
  */
 
 import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import Modal from '../../components/Modal/Modal';
 import Form from '../../components/Form/Form';
+import { modalToggle } from '../../actions/modal';
 
 class Home extends React.Component {
-  constructor() {
-    super();
-
-    this.state = {
-      modalOpen: false,
-    };
-
-    this.toggleModal = this.toggleModal.bind(this);
-  }
-
-  toggleModal() {
-    this.setState({
-      modalOpen: !this.state.modalOpen,
-    });
-  }
+  static propTypes = {
+    modalOpen: PropTypes.bool,
+    toggleModal: PropTypes.func,
+  };
 
   render() {
     return (
       <div>
-        <button onClick={this.toggleModal}>Open Modal</button>
-        <Modal show={this.state.modalOpen}>
+        <button onClick={this.props.toggleModal}>Open Modal</button>
+        <Modal show={this.props.modalOpen}>
           <Form />
         </Modal>
       </div>
@@ -40,4 +32,12 @@ class Home extends React.Component {
   }
 }
 
-export default Home;
+const mapState = state => ({
+  modalOpen: state.modal.modalOpen,
+});
+
+const mapDispatch = dispatch => ({
+  toggleModal: () => dispatch(modalToggle()),
+});
+
+export default connect(mapState, mapDispatch)(Home);
